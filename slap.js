@@ -72,6 +72,10 @@ function execute(slap) {
 
 setup();
 
+document.addEventListener('touchstart', function() {
+    doStep();
+});
+
 document.addEventListener('keypress', function(event) {
     var key = event.keyCode;
     if(key == SPACEBAR) {
