@@ -41,6 +41,10 @@ function setup() {
     slaps = [new Slap(boy, dog)];
 }
 
+function newLine() {
+    document.getElementById("log").appendChild(document.createElement("hr"));
+}
+
 function doStep() {
     next_slaps = [];
     for(slap of slaps) {
@@ -48,18 +52,21 @@ function doStep() {
         next_slaps = next_slaps.concat(execute(slap));
     }
     slaps = next_slaps;
-    document.getElementById("log").appendChild(document.createElement("hr"));
+    newLine();
+}
+
+function log(slapText) {
+    var paragraph = document.createElement("p");
+    var log = document.createTextNode(slapText);
+    paragraph.appendChild(log);
+    document.getElementById("log").appendChild(paragraph);
 }
 
 function execute(slap) {
     var beater = slap.beater;
     var victim = slap.victim;
 
-    var paragraph = document.createElement("p");
-    var log = document.createTextNode(beater.name + " hits " + victim.name);
-    paragraph.appendChild(log);
-    document.getElementById("log").appendChild(paragraph);
-    console.log(beater.name + " hits " + victim.name);
+    log(beater.name + " hits " + victim.name);
 
     var triggers = [];
     for(agent of agents) {
